@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
 @section('title')
-    Tambah Member
+    Tambah Supplier
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="active">Tambah Member</li>
+    <li class="active">Tambah Supplier</li>
 @endsection
 
 @section('content')
@@ -16,13 +16,13 @@
             <!-- general form elements -->
             <div class="box box-primary" style="margin-top: 20px">
                 <!-- form start -->
-                <form action="{{ route('member.store') }}" method="POST">
+                <form action="{{ route('supplier.store') }}" method="POST">
                     @csrf
                     <div class="box-body">
                         <div class="form-group">
                             <label for="nama">Nama</label>
                             <input type="text" name="nama" class="form-control" id="nama"
-                                placeholder="Nama Member">
+                                placeholder="Nama Supplier">
                             @error('nama')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -30,7 +30,7 @@
                         <div class="form-group">
                             <label for="telepon">Telepon</label>
                             <input type="text" name="telepon" class="form-control" id="telepon"
-                                placeholder="Nomor Telepon Member">
+                                placeholder="Nomor Telepon Supplier">
                             @error('telepon')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -38,7 +38,7 @@
                         <div class="form-group">
                             <label for="alamat">Alamat</label>
                             <input type="text" name="alamat" class="form-control" id="alamat"
-                                placeholder="Alamat Member">
+                                placeholder="Alamat Supplier">
                             @error('alamat')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror

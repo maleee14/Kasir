@@ -18,6 +18,8 @@
                 <div class="box-header">
                     <a href="{{ route('produk.create') }}" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i>
                         Tambah</a>
+                    {{-- <a href="#" class="btn btn-info btn-sm"><i class="fa fa-barcode"></i>
+                        Cetak Barcode</a> --}}
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -32,7 +34,7 @@
                                 <th>Harga Jual</th>
                                 <th>Stock</th>
                                 <th>Diskon</th>
-                                <th>Action</th>
+                                <th width="15%">Action</th>
                             </tr>
                         </thead>
                         <tbody>
