@@ -15,21 +15,8 @@
         <div class="col-xs-12">
 
             <div class="box">
-                @if (session()->has('success'))
-                    <div class="alert alert-success alert-dismissible">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        {{ session('success') }}
-                    </div>
-                @endif
-                @if (session()->has('delete'))
-                    <div class="alert alert-danger alert-dismissible">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        {{ session('delete') }}
-                    </div>
-                @endif
                 <div class="box-header">
-                    <a href="{{ route('kategori.create') }}" class="btn btn-success btn-sm"><i
-                            class="fa fa-plus-circle"></i>
+                    <a href="{{ route('kategori.create') }}" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i>
                         Tambah</a>
                 </div>
                 <!-- /.box-header -->
@@ -56,9 +43,8 @@
                                             <form action="{{ route('kategori.destroy', $item->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Yakin Hapus Kategori?')"><i
-                                                        class="fa fa-trash"></i>
+                                                <button type="submit" class="btn btn-danger btn-sm" id="delete">
+                                                    <i class="fa fa-trash"></i>
                                                     Delete</button>
                                             </form>
                                         </div>

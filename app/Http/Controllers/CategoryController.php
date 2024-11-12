@@ -53,7 +53,7 @@ class CategoryController extends Controller
         $kategori->nama = $request->nama;
         $kategori->update();
 
-        return redirect()->route('kategori.index')->with('success', 'Kategori Berhasil Diedit');
+        return redirect()->route('kategori.index')->with('success', 'Kategori Berhasil Diupdate');
     }
 
     public function destroy(Category $kategori)

@@ -31,6 +31,10 @@
             <li>
                 <a href="{{ route('supplier.index') }}"><i class="fa fa-truck"></i> <span>Supplier</span></a>
             </li>
+            <li class="header">TRANSAKSI</li>
+            <li>
+                <a href="{{ route('pengeluaran.index') }}"><i class="fa fa-dollar"></i> <span>Pengeluaran</span></a>
+            </li>
         </ul>
     </section>
     <!-- /.sidebar -->

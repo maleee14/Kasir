@@ -32,7 +32,7 @@ class SupplierController extends Controller
             'alamat' => $request->alamat,
         ]);
 
-        return redirect()->route('supplier.index');
+        return redirect()->route('supplier.index')->with('success', 'Supplier Berhasil Ditambah');
     }
 
     public function edit(Supplier $supplier)
@@ -53,12 +53,12 @@ class SupplierController extends Controller
         $supplier->alamat = $request->alamat;
         $supplier->update();
 
-        return redirect()->route('supplier.index');
+        return redirect()->route('supplier.index')->with('success', 'Supplier Berhasil Diupdate');
     }
 
     public function destroy(Supplier $supplier)
     {
         $supplier->delete();
-        return redirect()->route('supplier.index');
+        return redirect()->route('supplier.index')->with('delete', 'Supplier Berhasil Dihapus');
     }
 }

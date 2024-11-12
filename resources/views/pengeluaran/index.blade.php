@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
 @section('title')
-    Supplier
+    Pengeluaran
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="active">Supplier</li>
+    <li class="active">Pengeluaran</li>
 @endsection
 
 @section('content')
@@ -16,34 +16,35 @@
 
             <div class="box">
                 <div class="box-header">
-                    <a href="{{ route('supplier.create') }}" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i>
+                    <a href="{{ route('pengeluaran.create') }}" class="btn btn-success btn-sm"><i
+                            class="fa fa-plus-circle"></i>
                         Tambah</a>
+                    {{-- <a href="#" class="btn btn-info btn-sm"><i class="fa fa-id-card-o"></i>
+                        Cetak Kartu Member</a> --}}
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table id="supplier" class="table table-bordered table-striped">
+                    <table id="pengeluaran" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama</th>
-                                <th>Telepon</th>
-                                <th>Alamat</th>
+                                <th>Deskripsi</th>
+                                <th>Nominal</th>
                                 <th width="15%">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($supplier as $item)
+                            @foreach ($pengeluaran as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->nama }}</td>
-                                    <td>{{ $item->telepon }}</td>
-                                    <td>{{ $item->alamat }}</td>
+                                    <td>{{ $item->deskripsi }}</td>
+                                    <td>{{ $item->nominal }}</td>
                                     <td>
                                         <div class="btn-group" style="display: flex;">
-                                            <a href="{{ route('supplier.edit', $item->id) }}" type="button"
+                                            <a href="{{ route('pengeluaran.edit', $item->id) }}" type="button"
                                                 class="btn btn-info btn-sm"><i class="fa fa-pencil"></i>
                                                 Edit</a>
-                                            <form action="{{ route('supplier.destroy', $item->id) }}" method="post">
+                                            <form action="{{ route('pengeluaran.destroy', $item->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm" id="delete"><i
@@ -68,13 +69,13 @@
     @push('script')
         <script>
             $(function() {
-                $('#supplier').DataTable({
+                $('#pengeluaran').DataTable({
                     processing: true,
                     autoWidth: false,
                     columnDefs: [{
                         searchable: false,
                         sortable: false,
-                        targets: [0, 2, 3, 4]
+                        targets: [0, 4]
                     }]
                 })
             })

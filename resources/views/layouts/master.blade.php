@@ -33,6 +33,13 @@
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
 
+    <style>
+        .custom-toast {
+            font-size: 0.9em;
+        }
+    </style>
+
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -118,6 +125,60 @@
     <script src="{{ asset('assets/dist/js/pages/dashboard.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('assets/dist/js/demo.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            width: '20em',
+            timer: 3000,
+            timerProgressBar: true,
+            customClass: {
+                popup: 'custom-toast' // Adding a custom class for further styling
+            }
+        })
+
+        @if (session()->has('success'))
+            Toast.fire({
+                icon: 'success',
+                text: '{{ session('success') }}',
+            });
+        @endif
+
+        $(function() {
+            $(document).on('click', '#delete', function(e) {
+                e.preventDefault();
+                var form = $(this).closest("form");
+                Swal.fire({
+                    title: "Yakin Dihapus ?",
+                    text: "Data Anda Akan Hilang !",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Hapus",
+                    cancelButtonText: "Batal",
+                    customClass: {
+                        popup: 'custom-toast' // Adding a custom class for further styling
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            })
+        })
+
+        @if (session()->has('delete'))
+            Toast.fire({
+                icon: 'success',
+                text: '{{ session('delete') }}',
+            });
+        @endif
+    </script>
 
     @stack('script')
 </body>

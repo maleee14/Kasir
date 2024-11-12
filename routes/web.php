@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ExpenditureController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -28,6 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/member', MemberController::class);
     // Supplier
     Route::resource('/supplier', SupplierController::class);
+    // Pengeluaran
+    Route::resource('/pengeluaran', ExpenditureController::class);
 });
 
 require __DIR__ . '/auth.php';

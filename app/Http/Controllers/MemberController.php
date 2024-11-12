@@ -36,7 +36,7 @@ class MemberController extends Controller
             'alamat' => $request->alamat,
         ]);
 
-        return redirect()->route('member.index');
+        return redirect()->route('member.index')->with('success', 'Member Berhasil Ditambah');
     }
 
     public function edit(Member $member)
@@ -57,12 +57,12 @@ class MemberController extends Controller
         $member->alamat = $request->alamat;
         $member->update();
 
-        return redirect()->route('member.index');
+        return redirect()->route('member.index')->with('success', 'Member Berhasil Diupdate');
     }
 
     public function destroy(Member $member)
     {
         $member->delete();
-        return redirect()->route('member.index');
+        return redirect()->route('member.index')->with('delete', 'Member Berhasil Dihapus');
     }
 }

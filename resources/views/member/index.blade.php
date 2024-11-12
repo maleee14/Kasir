@@ -50,8 +50,7 @@
                                             <form action="{{ route('member.destroy', $item->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Yakin Hapus Member?')"><i
+                                                <button type="submit" class="btn btn-danger btn-sm" id="delete"><i
                                                         class="fa fa-trash"></i>
                                                     Delete</button>
                                             </form>

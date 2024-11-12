@@ -43,7 +43,7 @@ class ProductController extends Controller
             'diskon' => $request->diskon,
         ]);
 
-        return redirect()->route('produk.index');
+        return redirect()->route('produk.index')->with('success', 'Produk Berhasil Ditambah');
     }
 
     public function edit(Product $produk)
@@ -71,12 +71,12 @@ class ProductController extends Controller
         $produk->diskon = $request->diskon;
         $produk->update();
 
-        return redirect()->route('produk.index');
+        return redirect()->route('produk.index')->with('success', 'Produk Berhasil Diupdate');
     }
 
     public function destroy(Product $produk)
     {
         $produk->delete();
-        return redirect()->route('produk.index');
+        return redirect()->route('produk.index')->with('delete', 'Produk Berhasil Dihapus');
     }
 }
