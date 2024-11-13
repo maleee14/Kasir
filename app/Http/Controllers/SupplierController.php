@@ -59,6 +59,6 @@ class SupplierController extends Controller
     public function destroy(Supplier $supplier)
     {
         $supplier->delete();
-        return redirect()->route('supplier.index')->with('delete', 'Supplier Berhasil Dihapus');
+        return redirect()->route('supplier.index')->with('success', 'Supplier Berhasil Dihapus');
     }
 }

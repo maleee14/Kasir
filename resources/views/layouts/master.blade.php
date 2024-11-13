@@ -137,16 +137,9 @@
             timer: 3000,
             timerProgressBar: true,
             customClass: {
-                popup: 'custom-toast' // Adding a custom class for further styling
+                popup: 'custom-toast'
             }
         })
-
-        @if (session()->has('success'))
-            Toast.fire({
-                icon: 'success',
-                text: '{{ session('success') }}',
-            });
-        @endif
 
         $(function() {
             $(document).on('click', '#delete', function(e) {
@@ -162,7 +155,7 @@
                     confirmButtonText: "Hapus",
                     cancelButtonText: "Batal",
                     customClass: {
-                        popup: 'custom-toast' // Adding a custom class for further styling
+                        popup: 'custom-toast'
                     }
                 }).then((result) => {
                     if (result.isConfirmed) {
@@ -172,10 +165,10 @@
             })
         })
 
-        @if (session()->has('delete'))
+        @if (session()->has('success'))
             Toast.fire({
                 icon: 'success',
-                text: '{{ session('delete') }}',
+                text: '{{ session('success') }}',
             });
         @endif
     </script>

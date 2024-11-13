@@ -55,6 +55,6 @@ class ExpenditureController extends Controller
     public function destroy(Expenditure $pengeluaran)
     {
         $pengeluaran->delete();
-        return redirect()->route('pengeluaran.index')->with('delete', 'Pengeluaran Berhasil Dihapus');
+        return redirect()->route('pengeluaran.index')->with('success', 'Pengeluaran Berhasil Dihapus');
     }
 }

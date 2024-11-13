@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -77,6 +78,17 @@ class ProductController extends Controller
     public function destroy(Product $produk)
     {
         $produk->delete();
-        return redirect()->route('produk.index')->with('delete', 'Produk Berhasil Dihapus');
+        return redirect()->route('produk.index')->with('success', 'Produk Berhasil Dihapus');
+    }
+
+    public function cetakBarcode(Request $request)
+    {
+        $produk = Product::all();
+
+        $no = 1;
+
+        $pdf = Pdf::loadView('produk.barcode', compact('produk', 'no'));
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('Barcode Produk.pdf');
     }
 }

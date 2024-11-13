@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
 @section('title')
-    Pengeluaran
+    Pembelian
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="active">Pengeluaran</li>
+    <li class="active">Pembelian</li>
 @endsection
 
 @section('content')
@@ -16,35 +16,41 @@
 
             <div class="box">
                 <div class="box-header">
-                    <a href="{{ route('pengeluaran.create') }}" class="btn btn-success btn-sm"><i
-                            class="fa fa-plus-circle"></i>
-                        Tambah</a>
-                    {{-- <a href="#" class="btn btn-info btn-sm"><i class="fa fa-id-card-o"></i>
-                        Cetak Kartu Member</a> --}}
+                    <button onclick="addForm()" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i>
+                        Tambah</button>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table id="pengeluaran" class="table table-bordered table-striped">
+                    <table id="product" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Deskripsi</th>
-                                <th>Nominal</th>
-                                <th width="15%">Action</th>
+                                <th>Supplier</th>
+                                <th>Total Item</th>
+                                <th>Total Harga</th>
+                                <th>Diskon</th>
+                                <th>Bayar</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach ($pengeluaran as $item)
+                        {{-- <tbody>
+                            @foreach ($produk as $item)
                                 <tr>
+                                    <td><input type="checkbox" name="id[]" value="{{ $item->id }}"></td>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->deskripsi }}</td>
-                                    <td>{{ $item->nominal }}</td>
+                                    <td><span class="label label-success">{{ $item->kode }}</span></td>
+                                    <td>{{ $item->nama }}</td>
+                                    <td>{{ $item->category->nama }}</td>
+                                    <td>{{ $item->harga_beli }}</td>
+                                    <td>{{ $item->harga_jual }}</td>
+                                    <td>{{ $item->stock }}</td>
+                                    <td>{{ $item->diskon }}</td>
                                     <td>
                                         <div class="btn-group" style="display: flex;">
-                                            <a href="{{ route('pengeluaran.edit', $item->id) }}" type="button"
+                                            <a href="{{ route('produk.edit', $item->id) }}" type="button"
                                                 class="btn btn-info btn-sm"><i class="fa fa-pencil"></i>
                                                 Edit</a>
-                                            <form action="{{ route('pengeluaran.destroy', $item->id) }}" method="post">
+                                            <form action="{{ route('produk.destroy', $item->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm" id="delete"><i
@@ -55,7 +61,7 @@
                                     </td>
                                 </tr>
                             @endforeach
-                        </tbody>
+                        </tbody> --}}
                     </table>
                 </div>
                 <!-- /.box-body -->
@@ -65,20 +71,29 @@
         <!-- /.col -->
     </div>
     <!-- /.row -->
+    @includeIf('pembelian.supplier')
     <!-- /.content -->
     @push('script')
         <script>
             $(function() {
-                $('#pengeluaran').DataTable({
+                $('#product').DataTable({
                     processing: true,
                     autoWidth: false,
                     columnDefs: [{
                         searchable: false,
                         sortable: false,
-                        targets: [0, 3]
+                        targets: [0, 1, 2, 9]
+                    }, {
+                        searchable: false,
+                        targets: [5, 6, 7, 8]
                     }]
                 })
             })
+
+            function addForm() {
+                $('#modal-supplier').modal('show');
+
+            }
         </script>
     @endpush
 @endsection

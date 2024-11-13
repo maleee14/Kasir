@@ -18,7 +18,7 @@
                 <div class="box-header">
                     <a href="{{ route('produk.create') }}" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i>
                         Tambah</a>
-                    {{-- <a href="#" class="btn btn-info btn-sm"><i class="fa fa-barcode"></i>
+                    {{-- <a href="{{ route('cetak.barcode') }}" class="btn btn-info btn-sm"><i class="fa fa-barcode"></i>
                         Cetak Barcode</a> --}}
                 </div>
                 <!-- /.box-header -->
@@ -26,6 +26,7 @@
                     <table id="product" class="table table-bordered table-striped">
                         <thead>
                             <tr>
+                                {{-- <th><input type="checkbox" name="select_all" id="select_all"></th> --}}
                                 <th>No</th>
                                 <th>Kode Produk</th>
                                 <th>Nama</th>
@@ -40,6 +41,7 @@
                         <tbody>
                             @foreach ($produk as $item)
                                 <tr>
+                                    {{-- <td><input type="checkbox" name="id[]" value="{{ $item->id }}"></td> --}}
                                     <td>{{ $loop->iteration }}</td>
                                     <td><span class="label label-success">{{ $item->kode }}</span></td>
                                     <td>{{ $item->nama }}</td>
@@ -84,10 +86,17 @@
                     columnDefs: [{
                         searchable: false,
                         sortable: false,
-                        targets: [0, 1, 6, 7, 8]
+                        targets: [0, 1, 8]
+                    }, {
+                        searchable: false,
+                        targets: [4, 5, 6, 7]
                     }]
                 })
             })
+
+            // $('[name=select_all]').on('click', function() {
+            //     $(':checkbox').prop('checked', this.checked);
+            // })
         </script>
     @endpush
 @endsection
