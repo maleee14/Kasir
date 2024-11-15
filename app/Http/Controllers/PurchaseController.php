@@ -26,5 +26,7 @@ class PurchaseController extends Controller
 
         session(['id' => $pembelian->id]);
         session(['supplier_id' => $pembelian->supplier_id]);
+
+        return redirect()->route('pembelian-detail.index');
     }
 }
