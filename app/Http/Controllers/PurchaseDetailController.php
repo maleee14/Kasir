@@ -28,11 +28,12 @@ class PurchaseDetailController extends Controller
 
         foreach ($detail as $item) {
             $data[] = [
+                'id' => $item->id,
                 'kode' => $item->product['kode'],
                 'nama' => $item->product['nama'],
                 'harga' => $item->harga,
                 'jumlah' => $item->jumlah,
-                'subtotal' => $item->subtotal
+                'subtotal' => $item->harga * $item->jumlah
             ];
 
             $total += $item->harga * $item->jumlah;
@@ -59,5 +60,20 @@ class PurchaseDetailController extends Controller
         $detail->save();
 
         return response()->json('Data Berhasil Disimpan', 200);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $detail = PurchaseDetail::find($id);
+        $detail->jumlah = $request->jumlah;
+        $detail->subtotal = $detail->harga_beli * $request->jumlah;
+        $detail->update();
+    }
+
+    public function destroy($id)
+    {
+        $detail = PurchaseDetail::find($id);
+        $detail->delete();
+        return redirect()->route('pembelian-detail.index')->with('success', 'Produk Berhasil Dihapus');
     }
 }

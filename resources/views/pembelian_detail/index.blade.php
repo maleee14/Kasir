@@ -94,10 +94,19 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item['kode'] }}</td>
                                     <td>{{ $item['nama'] }}</td>
-                                    <td>{{ $item['harga'] }}</td>
-                                    <td>{{ $item['jumlah'] }}</td>
-                                    <td>{{ $item['subtotal'] }}</td>
-                                    <td>Test</td>
+                                    <td>Rp {{ number_format($item['harga'], 0, ',', '.') }}</td>
+                                    <td><input type="number" class="form-control input-sm quantity"
+                                            data-id="{{ $item['id'] }}" value="{{ $item['jumlah'] }}"></td>
+                                    <td>Rp {{ number_format($item['subtotal'], 0, ',', '.') }}</td>
+                                    <td>
+                                        <form action="{{ route('pembelian-detail.destroy', $item['id']) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm" id="delete"><i
+                                                    class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -105,7 +114,7 @@
 
                     <div class="row">
                         <div class="col-lg-8">
-                            <div class="tampil-bayar bg-primary">{{ $total }}</div>
+                            <div class="tampil-bayar bg-primary">Rp {{ number_format($total, 0, ',', '.') }}</div>
                             <div class="tampil-terbilang"></div>
                         </div>
                         <div class="col-lg-4">
@@ -120,7 +129,8 @@
                                     <div class="form-group row">
                                         <label for="totalrp" class="col-lg-2 control-label">Total</label>
                                         <div class="col-lg-8">
-                                            <input type="text" id="totalrp" class="form-control" readonly>
+                                            <input type="text" id="totalrp" class="form-control"
+                                                value="Rp {{ number_format($total, 0, ',', '.') }}" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -183,5 +193,37 @@
                     return;
                 })
         }
+
+        $(document).on('input', '.quantity', function() {
+            let id = $(this).data('id');
+            let jumlah = parseInt($(this).val());
+
+            if (jumlah < 1) {
+                $(this).val(1);
+                alert('Jumlah Minimal 1');
+                return;
+            }
+
+            if (jumlah > 10000) {
+                $(this).val(10000);
+                alert('Jumlah Tidak Boleh Lebih Dari 10.000');
+                return;
+            }
+
+            $.post(`{{ url('/pembelian-detail') }}/${id}`, {
+                    '_token': $('[name=csrf-token]').attr('content'),
+                    '_method': 'put',
+                    'jumlah': jumlah
+                })
+                .done((response) => {
+                    $(this).on('mouseleave', function() {
+                        location.reload(() => loadForm($('#diskon').val()));
+                    })
+                })
+                .fail((errors) => {
+                    alert('Tidak Dapat Menyimpan Data');
+                    return;
+                })
+        });
     </script>
 @endpush
