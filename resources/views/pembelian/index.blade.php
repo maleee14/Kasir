@@ -25,22 +25,24 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Tanggal</th>
                                 <th>Supplier</th>
                                 <th>Total Item</th>
                                 <th>Total Harga</th>
                                 <th>Diskon</th>
                                 <th>Bayar</th>
-                                <th>Action</th>
+                                <th width="15%">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($pembelian as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->created_at->format('d F Y') }}</td>
                                     <td>{{ $item->supplier->nama }}</td>
                                     <td>{{ $item->total_item }}</td>
                                     <td>Rp {{ number_format($item->total_harga, 0, ',', '.') }}</td>
-                                    <td>{{ $item->diskon }}</td>
+                                    <td>{{ $item->diskon }}%</td>
                                     <td>Rp {{ number_format($item->bayar, 0, ',', '.') }}</td>
                                     <td>
                                         <div class="btn-group" style="display: flex;">

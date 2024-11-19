@@ -38,7 +38,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->deskripsi }}</td>
-                                    <td>{{ $item->nominal }}</td>
+                                    <td>Rp {{ number_format($item->nominal, 0, ',', '.') }}</td>
                                     <td>
                                         <div class="btn-group" style="display: flex;">
                                             <a href="{{ route('pengeluaran.edit', $item->id) }}" type="button"

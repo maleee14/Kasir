@@ -46,10 +46,10 @@
                                     <td><span class="label label-success">{{ $item->kode }}</span></td>
                                     <td>{{ $item->nama }}</td>
                                     <td>{{ $item->category->nama }}</td>
-                                    <td>{{ $item->harga_beli }}</td>
-                                    <td>{{ $item->harga_jual }}</td>
+                                    <td>Rp {{ number_format($item->harga_beli, 0, ',', '.') }}</td>
+                                    <td>Rp {{ number_format($item->harga_jual, 0, ',', '.') }}</td>
                                     <td>{{ $item->stock }}</td>
-                                    <td>{{ $item->diskon }}</td>
+                                    <td>{{ $item->diskon }}%</td>
                                     <td>
                                         <div class="btn-group" style="display: flex;">
                                             <a href="{{ route('produk.edit', $item->id) }}" type="button"
