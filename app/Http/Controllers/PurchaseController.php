@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class PurchaseController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $pembelian = Purchase::orderBy('created_at', 'desc')->get();
         $supplier = Supplier::orderBy('nama', 'asc')->get();
@@ -56,5 +56,12 @@ class PurchaseController extends Controller
     {
         $pembelian->delete();
         return redirect()->route('pembelian.index')->with('success', 'Data Pembelian Berhasil Dihapus');
+    }
+
+    public function show($id)
+    {
+        $detail = PurchaseDetail::where('purchase_id', $id)->get();
+        $pembelian = Purchase::find($id);
+        return view('pembelian.detail', compact('detail', 'pembelian'));
     }
 }

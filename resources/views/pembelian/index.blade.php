@@ -46,8 +46,8 @@
                                     <td>Rp {{ number_format($item->bayar, 0, ',', '.') }}</td>
                                     <td>
                                         <div class="btn-group" style="display: flex;">
-                                            <a href="#" type="button" class="btn btn-info btn-sm"><i
-                                                    class="fa fa-eye"></i>
+                                            <a href="{{ route('pembelian.show', $item->id) }}"
+                                                class="btn btn-info btn-sm"><i class="fa fa-eye"></i>
                                                 Detail</a>
                                             <form action="{{ route('pembelian.destroy', $item->id) }}" method="post">
                                                 @csrf
