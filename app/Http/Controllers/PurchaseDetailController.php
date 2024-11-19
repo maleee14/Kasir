@@ -66,7 +66,7 @@ class PurchaseDetailController extends Controller
     {
         $detail = PurchaseDetail::find($id);
         $detail->jumlah = $request->jumlah;
-        $detail->subtotal = $detail->harga_beli * $request->jumlah;
+        $detail->subtotal = $detail->harga * $request->jumlah;
         $detail->update();
     }
 

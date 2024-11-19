@@ -121,15 +121,14 @@
                             <form action="{{ route('pembelian.store') }}" class="form-pembelian" method="post">
                                 @csrf
                                 <input type="hidden" name="purchase_id" value="{{ $purchase_id }}">
-                                <input type="hidden" name="total" value="{{ $total }}">
+                                <input type="hidden" name="total_harga" value="{{ $total }}">
                                 <input type="hidden" name="total_item" value="{{ $total_item }}">
-                                <input type="hidden" name="bayar" id="bayar">
 
                                 <div class="proses-bayar">
                                     <div class="form-group row">
                                         <label for="totalrp" class="col-lg-2 control-label">Total</label>
                                         <div class="col-lg-8">
-                                            <input type="text" id="totalrp" class="form-control"
+                                            <input type="text" id="total" class="form-control"
                                                 value="Rp {{ number_format($total, 0, ',', '.') }}" readonly>
                                         </div>
                                     </div>
@@ -143,7 +142,7 @@
                                     <div class="form-group row">
                                         <label for="bayar" class="col-lg-2 control-label">Bayar</label>
                                         <div class="col-lg-8">
-                                            <input type="text" id="bayarrp" class="form-control">
+                                            <input type="text" id="bayar" name="bayar" class="form-control">
                                         </div>
                                     </div>
                                     <div class="box-footer">
