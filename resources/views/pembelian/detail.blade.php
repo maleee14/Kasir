@@ -65,7 +65,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <h1>Total Harga : Rp {{ number_format($pembelian->total_harga, 0, ',', '.') }}</h1>
+                    <h1>Total Bayar : Rp {{ number_format($pembelian->total_harga, 0, ',', '.') }}</h1>
                 </div>
 
             </div>

@@ -5,10 +5,14 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                @if (isset(auth()->user()->foto))
+                    <img src="#" class="img-circle" alt="User Image">
+                @else
+                    <img src="{{ asset('assets/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                @endif
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
+                <p>{{ auth()->user()->name }}</p>
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
@@ -37,6 +41,10 @@
             </li>
             <li>
                 <a href="{{ route('pembelian.index') }}"><i class="fa fa-upload"></i> <span>Pembelian</span></a>
+            </li>
+            <li class="header">SISTEM</li>
+            <li>
+                <a href="{{ route('setting.index') }}"><i class="fa fa-cogs"></i> <span>Setting</span></a>
             </li>
         </ul>
     </section>

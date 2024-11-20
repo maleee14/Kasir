@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\PurchaseDetailController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/pembelian/create/{id}', [PurchaseController::class, 'create'])->name('pembelian.create');
     // Pembelian Detail
     Route::resource('/pembelian-detail', PurchaseDetailController::class);
+    // Setting
+    Route::resource('/setting', SettingController::class)->except('show', 'create', 'store', 'edit', 'destroy');
 });
 
 require __DIR__ . '/auth.php';
