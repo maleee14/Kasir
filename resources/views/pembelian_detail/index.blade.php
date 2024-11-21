@@ -13,7 +13,7 @@
     <style>
         .tampil-bayar {
             margin-top: 10px;
-            font-size: 5em;
+            font-size: 4.1em;
             text-align: center;
             height: 100px;
         }
@@ -114,7 +114,8 @@
 
                     <div class="row">
                         <div class="col-lg-8">
-                            <div class="tampil-bayar bg-primary">Rp {{ number_format($total, 0, ',', '.') }}</div>
+                            <input type="text" class="tampil-bayar bg-primary" id="tampil_bayar"
+                                value="Rp {{ number_format($total - ($diskon / 100) * $total, 0, ',', '.') }}" disabled>
                             <div class="tampil-terbilang"></div>
                         </div>
                         <div class="col-lg-4">
@@ -142,7 +143,10 @@
                                     <div class="form-group row">
                                         <label for="bayar" class="col-lg-2 control-label">Bayar</label>
                                         <div class="col-lg-8">
-                                            <input type="text" id="bayar" name="bayar" class="form-control">
+                                            <input type="hidden" id="bayar" name="bayar" class="form-control"
+                                                value="Rp {{ number_format($total, 0, ',', '.') }}">
+                                            <input type="text" id="bayar_display" class="form-control"
+                                                value="Rp {{ number_format($total - ($diskon / 100) * $total, 0, ',', '.') }}">
                                         </div>
                                     </div>
                                     <div class="box-footer">
@@ -216,13 +220,29 @@
                 })
                 .done((response) => {
                     $(this).on('mouseleave', function() {
-                        location.reload(() => loadForm($('#diskon').val()));
+                        location.reload();
                     })
                 })
                 .fail((errors) => {
                     alert('Tidak Dapat Menyimpan Data');
                     return;
                 })
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const total = {{ $total }};
+            const diskonInput = document.getElementById('diskon');
+            const bayarInput = document.getElementById('bayar');
+            const tampilBayar = document.getElementById('tampil_bayar');
+            const bayarDisplay = document.getElementById('bayar_display');
+
+            diskonInput.addEventListener('input', function() {
+                const diskon = parseFloat(diskonInput.value) || 0;
+                const bayar = total - (diskon / 100 * total);
+                bayarInput.value = bayar;
+                tampilBayar.value = 'Rp ' + bayar.toLocaleString('id-ID');
+                bayarDisplay.value = 'Rp ' + bayar.toLocaleString('id-ID');
+            });
         });
     </script>
 @endpush

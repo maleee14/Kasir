@@ -23,24 +23,42 @@
         <div class="col-lg-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <div style="margin-bottom: 10px">
-                        <a href="{{ route('pembelian.index') }}" class="btn btn-info btn-sm"><i class="fa fa-arrow-left"></i>
-                            Kembali</a>
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="col-lg-4">
+                                <table>
+                                    <tr>
+                                        <td>Supplier</td>
+                                        <td>: {{ $pembelian->supplier->nama }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Telepon</td>
+                                        <td>: {{ $pembelian->supplier->telepon }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Alamat</td>
+                                        <td>: {{ $pembelian->supplier->alamat }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-lg-4">
+                                <table>
+                                    <tr>
+                                        <td>Total Harga </td>
+                                        <td>: Rp {{ number_format($pembelian->total_harga, 0, ',', '.') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Diskon </td>
+                                        <td>: {{ $pembelian->diskon }}%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bayar </td>
+                                        <td>: Rp {{ number_format($pembelian->bayar, 0, ',', '.') }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                    <table>
-                        <tr>
-                            <td>Supplier</td>
-                            <td>: {{ $pembelian->supplier->nama }}</td>
-                        </tr>
-                        <tr>
-                            <td>Telepon</td>
-                            <td>: {{ $pembelian->supplier->telepon }}</td>
-                        </tr>
-                        <tr>
-                            <td>Alamat</td>
-                            <td>: {{ $pembelian->supplier->alamat }}</td>
-                        </tr>
-                    </table>
                 </div>
                 <div class="box-body">
                     <table id="detail" class="table table-striper table-bordered">
@@ -65,24 +83,12 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <h1>Total Bayar : Rp {{ number_format($pembelian->total_harga, 0, ',', '.') }}</h1>
                 </div>
-
+                <div style="padding-left: 10px; padding-bottom: 10px;">
+                    <a href="{{ route('pembelian.index') }}" class="btn btn-info btn-sm"><i class="fa fa-arrow-left"></i>
+                        Kembali</a>
+                </div>
             </div>
         </div>
     </div>
-    {{-- @push('script')
-        <script>
-            $(function() {
-                $('#detail').DataTable({
-                    processing: true,
-                    autoWidth: false,
-                    columnDefs: [{
-                        searchable: false,
-                        targets: [0, 1, 3, 4, 5]
-                    }]
-                })
-            })
-        </script>
-    @endpush --}}
 @endsection

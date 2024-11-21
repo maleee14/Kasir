@@ -15,7 +15,7 @@ class PurchaseDetailController extends Controller
         $purchase_id = session('id');
         $produk = Product::orderBy('nama')->get();
         $supplier = Supplier::find(session('supplier_id'));
-        $diskon = Purchase::find($purchase_id)->diskon ?? 0;
+        $diskon =  Purchase::find($purchase_id)->diskon ?? 0;
 
         if (! $supplier) {
             abort(404);
@@ -23,7 +23,7 @@ class PurchaseDetailController extends Controller
 
         $detail = PurchaseDetail::with('product')->where('purchase_id', $purchase_id)->get();
         $data = array();
-        $total = 0;
+        $total =  0;
         $total_item = 0;
 
         foreach ($detail as $item) {
