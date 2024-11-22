@@ -60,9 +60,9 @@ class SaleDetailController extends Controller
         $detail = new SaleDetail();
         $detail->sale_id = $request->sale_id;
         $detail->product_id = $produk->id;
-        $detail->harga = $produk->harga_beli;
+        $detail->harga = $produk->harga_jual;
         $detail->jumlah = 1;
-        $detail->subtotal = $produk->harga_beli;
+        $detail->subtotal = $produk->harga_jual;
         $detail->save();
 
         return response()->json('Data Berhasil Disimpan', 200);

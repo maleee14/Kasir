@@ -23,7 +23,7 @@
                                 <td width="5%">{{ $loop->iteration }}</td>
                                 <td><span class="label label-success">{{ $item->kode }}</span></td>
                                 <td>{{ $item->nama }}</td>
-                                <td>{{ $item->harga_beli }}</td>
+                                <td>Rp {{ number_format($item->harga_jual, 0, ',', '.') }}</td>
                                 <td>
                                     <a href="#" class="btn btn-primary btn-xs"
                                         onclick="pilihProduk('{{ $item->id }}', '{{ $item->kode }}')">
