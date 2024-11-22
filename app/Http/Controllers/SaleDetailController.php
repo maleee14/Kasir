@@ -39,8 +39,13 @@ class SaleDetailController extends Controller
                 $total += $item->harga * $item->jumlah;
                 $total_item += $item->jumlah;
             }
-
             return view('penjualan_detail.index', compact('sale_id', 'produk', 'member', 'diskon', 'memberSelected', 'data', 'total', 'total_item'));
+        } else {
+            if (auth()->user()->level == 1) {
+                return redirect()->route('penjualan.create');
+            } else {
+                return 'test';
+            }
         }
     }
 

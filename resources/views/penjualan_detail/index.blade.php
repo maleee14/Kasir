@@ -42,22 +42,6 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="box">
-                {{-- <div class="box-header with-border">
-                    <table>
-                        <tr>
-                            <td>Supplier</td>
-                            <td>: {{ $supplier->nama }}</td>
-                        </tr>
-                        <tr>
-                            <td>Telepon</td>
-                            <td>: {{ $supplier->telepon }}</td>
-                        </tr>
-                        <tr>
-                            <td>Alamat</td>
-                            <td>: {{ $supplier->alamat }}</td>
-                        </tr>
-                    </table>
-                </div> --}}
                 <div class="box-body">
 
                     <form class="form-produk">
@@ -119,7 +103,7 @@
                             <div class="tampil-terbilang"></div>
                         </div>
                         <div class="col-lg-4">
-                            <form action="{{ route('pembelian.store') }}" class="form-pembelian" method="post">
+                            <form action="{{ route('penjualan.store') }}" class="form-pembelian" method="post">
                                 @csrf
                                 <input type="hidden" name="sale_id" value="{{ $sale_id }}">
                                 <input type="hidden" name="total_harga" value="{{ $total }}">
@@ -170,7 +154,9 @@
                                     <div class="form-group row">
                                         <label for="kembali" class="col-lg-2 control-label">Kembali</label>
                                         <div class="col-lg-8">
-                                            <input type="number" name="kembali" id="kembali" class="form-control"
+                                            <input type="hidden" name="kembali" id="kembali" class="form-control"
+                                                value="0" readonly>
+                                            <input type="text" id="kembali_display" class="form-control"
                                                 value="0" readonly>
                                         </div>
                                     </div>
@@ -265,28 +251,29 @@
 
         }
 
+        function updateValues() {
+            const total = {{ $total }};
+            const diskon = parseFloat($('#diskon').val()) || 0;
+            const bayar = total - (diskon / 100 * total);
+            const diterima = parseFloat($('#diterima').val()) || 0;
+            const kembali = diterima - bayar;
+
+            $('#bayar').val(bayar);
+            $('#bayar_display').val('Rp ' + bayar.toLocaleString('id-ID'));
+            $('#kembali').val(kembali);
+            $('#kembali_display').val('Rp ' + kembali.toLocaleString('id-ID'));
+        }
+
         function pilihMember(id, kode) {
             $('#member_id').val(id);
             $('#kode_member').val(kode);
-
-            const diskon = parseFloat('{{ $diskon }}') || 0;
-            $('#diskon').val(diskon);
-            updateBayar(diskon);
+            $('#diskon').val(parseFloat('{{ $diskon }}') || 0);
+            updateValues();
             hideMember();
         }
 
-        function updateBayar(diskon) {
-            const total = {{ $total }};
-            const bayar = total - (diskon / 100 * total);
-            $('#bayar').val(bayar);
-            $('#tampil_bayar').val('Rp ' + bayar.toLocaleString('id-ID'));
-            $('#bayar_display').val('Rp ' + bayar.toLocaleString('id-ID'));
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            $('#diskon').on('input', function() {
-                updateBayar(parseFloat(this.value) || 0);
-            });
+        $(document).ready(function() {
+            $('#diskon, #diterima').on('input', updateValues);
         });
     </script>
 @endpush
