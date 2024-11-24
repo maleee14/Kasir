@@ -144,7 +144,7 @@
                                         <label for="bayar" class="col-lg-2 control-label">Bayar</label>
                                         <div class="col-lg-8">
                                             <input type="hidden" id="bayar" name="bayar" class="form-control"
-                                                value="Rp {{ number_format($total, 0, ',', '.') }}">
+                                                value="{{ $total - ($diskon / 100) * $total }}">
                                             <input type="text" id="bayar_display" class="form-control"
                                                 value="Rp {{ number_format($total - ($diskon / 100) * $total, 0, ',', '.') }}">
                                         </div>

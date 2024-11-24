@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\PurchaseDetailController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SaleDetailController;
 use App\Http\Controllers\SettingController;
@@ -48,6 +49,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/penjualan', SaleController::class);
     // Transaksi
     Route::resource('/transaksi', SaleDetailController::class);
+    // Laporan
+    Route::get('/laporan', [ReportController::class, 'index'])->name('laporan.index');
 });
 
 require __DIR__ . '/auth.php';

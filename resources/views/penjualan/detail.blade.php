@@ -32,18 +32,6 @@
                                         <td>: {{ auth()->user()->name }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Member</td>
-                                        <td>: {{ $penjualan->member->nama ?? '--- ---' }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Kode Member</td>
-                                        <td>: {{ $penjualan->member->kode ?? '--- ---' }}</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="col-lg-4">
-                                <table>
-                                    <tr>
                                         <td>Total Harga </td>
                                         <td>: Rp {{ number_format($penjualan->total_harga, 0, ',', '.') }}</td>
                                     </tr>
@@ -51,9 +39,22 @@
                                         <td>Diskon </td>
                                         <td>: {{ $penjualan->diskon }}%</td>
                                     </tr>
+                                </table>
+                            </div>
+                            <div class="col-lg-4">
+                                <table>
                                     <tr>
                                         <td>Bayar </td>
                                         <td>: Rp {{ number_format($penjualan->bayar, 0, ',', '.') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Diterima </td>
+                                        <td>: Rp {{ number_format($penjualan->diterima, 0, ',', '.') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kembali </td>
+                                        <td>: Rp {{ number_format($penjualan->diterima - $penjualan->bayar, 0, ',', '.') }}
+                                        </td>
                                     </tr>
                                 </table>
                             </div>

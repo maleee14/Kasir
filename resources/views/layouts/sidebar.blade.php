@@ -53,6 +53,10 @@
                 <a href="{{ route('penjualan.create') }}"><i class="fa fa-cart-plus"></i> <span>Transaksi
                         Baru</span></a>
             </li>
+            <li class="header">REPORT</li>
+            <li>
+                <a href="{{ route('laporan.index') }}"><i class="fa fa-file-pdf-o"></i> <span>Laporan</span></a>
+            </li>
             <li class="header">SISTEM</li>
             <li>
                 <a href="{{ route('setting.index') }}"><i class="fa fa-cogs"></i> <span>Setting</span></a>
