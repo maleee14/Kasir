@@ -16,15 +16,30 @@
 
             <div class="box">
                 <div class="box-header">
-                    <a href="{{ route('pengeluaran.create') }}" class="btn btn-success btn-sm"><i
-                            class="fa fa-plus-circle"></i>
-                        Tambah</a>
-                    {{-- <a href="#" class="btn btn-info btn-sm"><i class="fa fa-id-card-o"></i>
-                        Cetak Kartu Member</a> --}}
+                    <form action="" method="get">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="min-date">Tanggal Awal:</label>
+                                <input type="date" id="min-date" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="max-date">Tanggal Akhir:</label>
+                                <input type="date" id="max-date" class="form-control">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-info btn-sm" style="margin-top: 26px"><i class="fa fa-filter">
+                                Filter</i>
+                        </button>
+                    </form>
+                    <a href="#" class="btn btn-success btn-sm" style="margin-top: -51px; margin-left: 70px;">
+                        <i class="fa fa-file-pdf-o"></i> Import
+                    </a>
+
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <input type="hidden" value="{{ $total_pendapatan }}">
                     <table id="pengeluaran" class="table table-bordered table-striped">
                         <thead>
                             <tr>
@@ -40,7 +55,7 @@
                             @foreach ($data as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item['tanggal'] }}</td>
+                                    <td>{{ date('d F Y', strtotime($item['tanggal'])) }}</td>
                                     <td>Rp {{ number_format($item['pengeluaran'], 0, ',', '.') }}</td>
                                     <td>Rp {{ number_format($item['pembelian'], 0, ',', '.') }}</td>
                                     <td>Rp {{ number_format($item['penjualan'], 0, ',', '.') }}</td>
@@ -48,6 +63,13 @@
                                 </tr>
                             @endforeach
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4"></td>
+                                <td>Total Pendapatan :</td>
+                                <td>Rp {{ number_format($total_pendapatan, 0, ',', '.') }}</td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
                 <!-- /.box-body -->
@@ -60,17 +82,17 @@
     <!-- /.content -->
     @push('script')
         <script>
-            $(function() {
-                $('#pengeluaran').DataTable({
-                    processing: true,
-                    autoWidth: false,
-                    columnDefs: [{
-                        searchable: false,
-                        sortable: false,
-                        targets: [0, 3]
-                    }]
-                })
-            })
+            // $(function() {
+            //     $('#pengeluaran').DataTable({
+            //         processing: true,
+            //         autoWidth: false,
+            //         columnDefs: [{
+            //             searchable: false,
+            //             sortable: false,
+            //             targets: [0, 3]
+            //         }]
+            //     })
+            // })
         </script>
     @endpush
 @endsection
