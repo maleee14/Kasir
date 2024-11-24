@@ -9,10 +9,12 @@ use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $awal = date('Y-m-d', mktime(0, 0, 0, date('m'), 1, date('Y')));
-        $akhir = date('Y-m-d');
+        $awal = $request->input('awal', date('Y-m-d', mktime(0, 0, 0, date('m'), 1, date('Y'))));
+        $akhir = $request->input('akhir', date('Y-m-d'));
+
+        $tanggal_awal = $awal;
 
         $data = array();
         $pendapatan = 0;
@@ -39,6 +41,14 @@ class ReportController extends Controller
             $data[] = $row;
         }
 
-        return view('laporan.index', compact('data', 'total_pendapatan'));
+        return view('laporan.index', compact('data', 'total_pendapatan', 'tanggal_awal', 'akhir'));
+    }
+
+    public function filter(Request $request)
+    {
+        $awal = $request->input('awal');
+        $akhir = $request->input('akhir');
+
+        return redirect()->route('laporan.index', compact('awal', 'akhir'));
     }
 }

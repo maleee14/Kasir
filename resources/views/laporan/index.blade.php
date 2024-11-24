@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
 @section('title')
-    Pengeluaran
+    Pendapatan {{ date('d F Y', strtotime($tanggal_awal)) }} - {{ date('d F Y', strtotime($akhir)) }}
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="active">Pengeluaran</li>
+    <li class="active">Pendapatan</li>
 @endsection
 
 @section('content')
@@ -16,17 +16,17 @@
 
             <div class="box">
                 <div class="box-header">
-                    <form action="" method="get">
+                    <form action="{{ route('laporan.filter') }}" method="get">
                         <div class="col-sm-3">
                             <div class="form-group">
-                                <label for="min-date">Tanggal Awal:</label>
-                                <input type="date" id="min-date" class="form-control">
+                                <label for="awal">Tanggal Awal:</label>
+                                <input type="date" name="awal" id="awal" class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group">
-                                <label for="max-date">Tanggal Akhir:</label>
-                                <input type="date" id="max-date" class="form-control">
+                                <label for="akhir">Tanggal Akhir:</label>
+                                <input type="date" name="akhir" id="akhir" class="form-control">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-info btn-sm" style="margin-top: 26px"><i class="fa fa-filter">

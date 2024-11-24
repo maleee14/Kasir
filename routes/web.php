@@ -51,6 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/transaksi', SaleDetailController::class);
     // Laporan
     Route::get('/laporan', [ReportController::class, 'index'])->name('laporan.index');
+    Route::get('/laporan/filter', [ReportController::class, 'filter'])->name('laporan.filter');
 });
 
 require __DIR__ . '/auth.php';
