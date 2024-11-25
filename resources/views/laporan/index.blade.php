@@ -33,9 +33,13 @@
                                 Filter</i>
                         </button>
                     </form>
-                    <a href="#" class="btn btn-success btn-sm" style="margin-top: -51px; margin-left: 70px;">
-                        <i class="fa fa-file-pdf-o"></i> Import
-                    </a>
+                    <form action="{{ route('laporan.pdf') }}" method="get">
+                        <input type="hidden" name="awal" value="{{ $tanggal_awal }}">
+                        <input type="hidden" name="akhir" value="{{ $akhir }}">
+                        <button type="submit" class="btn btn-success btn-sm"
+                            style="margin-top: -51px; margin-left: 70px;"><i class="fa fa-file-pdf-o"> Export</i>
+                        </button>
+                    </form>
 
                 </div>
                 <!-- /.box-header -->

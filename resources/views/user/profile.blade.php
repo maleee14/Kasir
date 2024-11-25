@@ -16,7 +16,7 @@
             <!-- general form elements -->
             <div class="box box-primary" style="margin-top: 20px">
                 <!-- form start -->
-                <form action="{{ route('user.update', $user->id) }}" method="POST">
+                <form action="{{ route('user.update_profile') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('put')
                     <div class="box-body">
@@ -27,6 +27,10 @@
                             @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="foto">Foto</label>
+                            <input type="file" name="foto" class="form-control" id="foto">
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
@@ -54,7 +58,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </form>
             </div>

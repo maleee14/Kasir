@@ -40,7 +40,23 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'profile' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/profile'),
+            'url' => env('APP_URL') . '/storage/profile',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'setting' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/setting'),
+            'url' => env('APP_URL') . '/storage/setting',
             'visibility' => 'public',
             'throw' => false,
         ],

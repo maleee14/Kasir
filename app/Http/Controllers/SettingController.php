@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SettingController extends Controller
 {
@@ -21,17 +22,29 @@ class SettingController extends Controller
 
         if ($request->has('path_logo')) {
             $file = $request->file('path_logo');
-            $nama = 'kartu-member-' . date('Y-m-dHis') . $file->getClientOriginalExtension();
-            $file->move(public_path('/img'), $nama);
+            $path = time() . '_' . 'logo_toko' . '.' . $file->getClientOriginalExtension();
 
-            $setting->path_kartu_member = "/img/$nama";
+            Storage::disk('setting')->put($path, file_get_contents($file));
+
+            // Optionally, delete the old image file
+            if ($setting->path_logo) {
+                Storage::disk('setting')->delete($setting->path_logo);
+            }
+
+            $setting->path_logo = $path;
         }
         if ($request->has('path_kartu_member')) {
             $file = $request->file('path_kartu_member');
-            $nama = 'kartu-member-' . date('Y-m-dHis') . $file->getClientOriginalExtension();
-            $file->move(public_path('/img'), $nama);
+            $path = time() . '_' . 'kartu_member' . '.' . $file->getClientOriginalExtension();
 
-            $setting->path_kartu_member = "/img/$nama";
+            Storage::disk('setting')->put($path, file_get_contents($file));
+
+            // Optionally, delete the old image file
+            if ($setting->path_kartu_member) {
+                Storage::disk('setting')->delete($setting->path_kartu_member);
+            }
+
+            $setting->path_kartu_member = $path;
         }
 
         $setting->tipe_nota = $request->tipe_nota;

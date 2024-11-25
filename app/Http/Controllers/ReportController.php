@@ -5,17 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Expenditure;
 use App\Models\Purchase;
 use App\Models\Sale;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
-    public function index(Request $request)
+    private function getData($awal, $akhir)
     {
-        $awal = $request->input('awal', date('Y-m-d', mktime(0, 0, 0, date('m'), 1, date('Y'))));
-        $akhir = $request->input('akhir', date('Y-m-d'));
-
-        $tanggal_awal = $awal;
-
         $data = array();
         $pendapatan = 0;
         $total_pendapatan = 0;
@@ -41,6 +37,19 @@ class ReportController extends Controller
             $data[] = $row;
         }
 
+        return ['data' => $data, 'total_pendapatan' => $total_pendapatan];
+    }
+
+    public function index(Request $request)
+    {
+        $awal = $request->input('awal', date('Y-m-d', mktime(0, 0, 0, date('m'), 1, date('Y'))));
+        $akhir = $request->input('akhir', date('Y-m-d'));
+
+        $result = $this->getData($awal, $akhir);
+        $data = $result['data'];
+        $total_pendapatan = $result['total_pendapatan'];
+        $tanggal_awal = $awal;
+
         return view('laporan.index', compact('data', 'total_pendapatan', 'tanggal_awal', 'akhir'));
     }
 
@@ -50,5 +59,20 @@ class ReportController extends Controller
         $akhir = $request->input('akhir');
 
         return redirect()->route('laporan.index', compact('awal', 'akhir'));
+    }
+
+    public function exportPdf(Request $request)
+    {
+        $awal = $request->input('awal', date('Y-m-d', mktime(0, 0, 0, date('m'), 1, date('Y'))));
+        $akhir = $request->input('akhir', date('Y-m-d'));
+
+        $result = $this->getData($awal, $akhir);
+        $data = $result['data'];
+        $total_pendapatan = $result['total_pendapatan'];
+        $tanggal_awal = $awal;
+
+        $pdf = Pdf::loadView('laporan.pdf', compact('data', 'total_pendapatan', 'tanggal_awal', 'akhir'));
+
+        return $pdf->stream('laporan.pdf');
     }
 }

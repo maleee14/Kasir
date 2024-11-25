@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -56,7 +57,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         if ($request->has('password') && $request->password != "") {
-            $user->password =  bcrypt($request->password);
+            $user->password = Hash::make($request->password);
         }
         $user->update();
 
@@ -73,5 +74,40 @@ class UserController extends Controller
     {
         $user = auth()->user();
         return view('user.profile', compact('user'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'confirmed',
+
+        ]);
+
+        $user = auth()->user();
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        if ($request->has('password') && $request->password != "") {
+            $user->password = Hash::make($request->password);
+        }
+
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $path = time() . '_' . $request->name . '.' . $file->getClientOriginalExtension();
+
+            Storage::disk('profile')->put($path, file_get_contents($file));
+
+            // Optionally, delete the old image file
+            if ($user->foto) {
+                Storage::disk('profile')->delete($user->foto);
+            }
+
+            $user->foto = $path;
+        }
+
+        $user->update();
+        return redirect()->route('user.profile')->with('success', 'Berhasil Update Profile');
     }
 }

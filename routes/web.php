@@ -16,8 +16,9 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -53,9 +54,11 @@ Route::middleware('auth')->group(function () {
     // Laporan
     Route::get('/laporan', [ReportController::class, 'index'])->name('laporan.index');
     Route::get('/laporan/filter', [ReportController::class, 'filter'])->name('laporan.filter');
+    Route::get('/laporan/pdf', [ReportController::class, 'exportPDF'])->name('laporan.pdf');
     // User
     Route::resource('/user', UserController::class)->except('show');
     Route::get('/user/profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::put('/user/profile/update', [UserController::class, 'updateProfile'])->name('user.update_profile');
 });
 
 require __DIR__ . '/auth.php';

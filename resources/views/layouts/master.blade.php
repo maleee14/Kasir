@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Kasir | @yield('title')</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="{{ url('storage/setting', $setting->path_logo) }}">
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->

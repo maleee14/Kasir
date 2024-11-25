@@ -26,7 +26,8 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         @if (isset(auth()->user()->foto))
-                            <img src="#" class="user-image" alt="User Image">
+                            <img src="{{ url('storage/profile', auth()->user()->foto) }}" class="user-image"
+                                alt="User Image">
                         @else
                             <img src="{{ asset('assets/dist/img/user2-160x160.jpg') }}" class="user-image"
                                 alt="User Image">
@@ -37,7 +38,8 @@
                         <!-- User image -->
                         <li class="user-header">
                             @if (isset(auth()->user()->foto))
-                                <img src="#" class="img-circle" alt="User Image">
+                                <img src="{{ url('storage/profile', auth()->user()->foto) }}" class="img-circle"
+                                    alt="User Image">
                             @else
                                 <img src="{{ asset('assets/dist/img/user2-160x160.jpg') }}" class="img-circle"
                                     alt="User Image">
