@@ -59,6 +59,9 @@
             </li>
             <li class="header">SISTEM</li>
             <li>
+                <a href="{{ route('user.index') }}"><i class="fa fa-users"></i> <span>Users</span></a>
+            </li>
+            <li>
                 <a href="{{ route('setting.index') }}"><i class="fa fa-cogs"></i> <span>Setting</span></a>
             </li>
         </ul>
