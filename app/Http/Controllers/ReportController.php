@@ -37,7 +37,7 @@ class ReportController extends Controller
             $data[] = $row;
         }
 
-        return ['data' => $data, 'total_pendapatan' => $total_pendapatan];
+        return compact('data', 'total_pendapatan');
     }
 
     public function index(Request $request)
