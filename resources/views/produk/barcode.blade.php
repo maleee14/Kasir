@@ -21,10 +21,10 @@
                 <td class="text-center">
                     <p>{{ $item->nama }} - Rp. {{ $item->harga_jual }}</p>
                     <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($item->kode, 'C39') }}"
-                        alt="{{ $item->kode }}" width="180" height="60">
+                        alt="{{ $item->kode }}" width="155" height="50">
                     {{ $item->kode }}
                 </td>
-                @if ($no++ % 3 == 0)
+                @if ($no++ % 4 == 0)
         <tr>
 
         </tr>

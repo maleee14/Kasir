@@ -18,8 +18,8 @@
                 <div class="box-header">
                     <a href="{{ route('produk.create') }}" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i>
                         Tambah</a>
-                    {{-- <a href="{{ route('cetak.barcode') }}" class="btn btn-info btn-sm"><i class="fa fa-barcode"></i>
-                        Cetak Barcode</a> --}}
+                    <a href="{{ route('cetak.barcode') }}" class="btn btn-info btn-sm"><i class="fa fa-barcode"></i>
+                        Cetak Barcode</a>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">

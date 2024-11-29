@@ -72,7 +72,8 @@ class ReportController extends Controller
         $tanggal_awal = $awal;
 
         $pdf = Pdf::loadView('laporan.pdf', compact('data', 'total_pendapatan', 'tanggal_awal', 'akhir'));
+        $pdf->setPaper('a4', 'potrait');
 
-        return $pdf->stream('laporan.pdf');
+        return $pdf->stream('Laporan Pendapatan-' . $tanggal_awal . ' -- ' . $akhir . '.pdf');
     }
 }
