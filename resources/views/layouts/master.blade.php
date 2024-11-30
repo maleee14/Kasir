@@ -174,6 +174,11 @@
                 icon: 'success',
                 text: '{{ session('success') }}',
             });
+        @elseif (session()->has('error'))
+            Toast.fire({
+                icon: 'error',
+                text: '{{ session('error') }}',
+            });
         @endif
     </script>
 

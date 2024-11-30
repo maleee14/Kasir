@@ -29,7 +29,7 @@
                                 <table>
                                     <tr>
                                         <td>Kasir</td>
-                                        <td>: {{ auth()->user()->name }}</td>
+                                        <td>: {{ $penjualan->user->name }}</td>
                                     </tr>
                                     <tr>
                                         <td>Total Harga </td>

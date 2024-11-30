@@ -7,6 +7,8 @@ use App\Models\Product;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
+use function Laravel\Prompts\alert;
+
 class ProductController extends Controller
 {
     public function index()
@@ -85,10 +87,15 @@ class ProductController extends Controller
     {
         $produk = Product::all();
 
-        $no = 1;
+        if ($produk->count() < 4) {
+            return redirect()->back()->with('error', 'Minimal Harus Ada 4 Produk');
+        } else {
 
-        $pdf = Pdf::loadView('produk.barcode', compact('produk', 'no'));
-        $pdf->setPaper('a4', 'potrait');
-        return $pdf->stream('Barcode Produk.pdf');
+            $no = 1;
+
+            $pdf = Pdf::loadView('produk.barcode', compact('produk', 'no'));
+            $pdf->setPaper('a4', 'potrait');
+            return $pdf->stream('Barcode Produk.pdf');
+        }
     }
 }
